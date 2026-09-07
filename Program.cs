@@ -9,6 +9,16 @@ builder.Services.AddControllers();
 builder.Services.AddTransient<ProjetoRepository, ProjetoRepository>();
 builder.Services.AddTransient<UsuarioRepository,UsuarioRepository>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = "JwtBearer";
@@ -31,6 +41,8 @@ builder.Services.AddAuthentication(options =>
 var app = builder.Build();
 
 app.UseRouting();
+
+app.UseCors("CorsPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();
