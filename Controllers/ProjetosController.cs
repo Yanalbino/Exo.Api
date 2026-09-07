@@ -10,6 +10,7 @@ namespace Exo.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProjetosController : ControllerBase
     {
         private readonly ProjetoRepository _projetoRepository;
